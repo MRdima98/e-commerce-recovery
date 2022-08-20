@@ -7,34 +7,24 @@
 {% block content %} 
   <form method="POST" class='container' enctype="multipart/form-data">
     {% csrf_token %}
-    {{ cost_form.managment_from }}
+    {{ cost_form.management_form }}
     <div class="row">
       {% for field in rooms_form %}
           <div class="col-lg-6 light-top-margin">
             {{ field.label}}
             {{ field }}
           </div>
-      {% endfor %}asdfasdf
+      {% endfor %}
     </div>
     <div id="cost-row" class="row">
-      {{ cost_form.management_form }}
       <h4 class="light-top-margin"><span>Costo per periodo</span></h4>
       <div id="cost-by-time" class='cost_forms'>
         {% for form in cost_form %}
           {% for field in form %}
             {% if field.label == 'Id' %}
               {{ field }}
-            {% elif field.label == 'End date' %}
-            <div class="col-lg-3 light-top-margin">
-              {{ field }}
-            </div> 
-            <div class="col-lg-offset-1 col-lg-1 light-top-margin">
-              <a href=""  class="btn btn-md btn-danger col-lg-9 base-height center-icon">
-                <ion-icon name="trash-outline" ></ion-icon>
-              </a>
-            </div> 
             {% else %}
-            <div class="col-lg-3 light-top-margin ">
+            <div class="col-lg-4 light-top-margin ">
               {{ field }}
             </div>  
             {% endif %}
@@ -42,11 +32,12 @@
         {% endfor%}
       </div>
     </div>
-    <button id="add-more" type="button" class="btn btn-lg btn-primary col-lg-4 col-lg-offset-2 light-top-margin">Add Period</button>
+    <button id="add-more" type="button" class="hidden btn btn-lg btn-primary col-lg-4 col-lg-offset-2 light-top-margin">Add Period</button>
     <input type="submit" value="Prossima stanza" class="btn btn-lg btn-primary col-lg-4 col-lg-offset-2 light-top-margin">
   </form>
   <div id="cost-by-time-empty" class="hidden">
     {% for form in cost_form %}
+      {{ cost_form.managment_form }}
       {% for field in form %}
         {% if field.label == 'Id' %}
           {{ field }}

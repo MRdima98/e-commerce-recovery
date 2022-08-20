@@ -46,7 +46,7 @@ def new_hotel(request):
 
 def add_edit_room(request, hotel_id, room_id):
     rooms_form = RoomsForm(request.POST or None, request.FILES or None)
-    cost_factory = formset_factory(CostForm, extra = 1)
+    cost_factory = formset_factory(CostForm, extra = 4)
     cost_formset = cost_factory(request.POST or None)
     hotel = Hotel.objects.get(id=hotel_id)
     if cost_formset.is_valid() and rooms_form.is_valid():
@@ -57,9 +57,6 @@ def add_edit_room(request, hotel_id, room_id):
         if room_id == hotel.rooms_count:
             return redirect('/hotel/list')
         return redirect('/hotel/rooms/' + str(hotel_id) + '&' + str(room_id+1))
-    else:
-        print("N O P E")
-        print(rooms_form.errors)
     context = { 'rooms_form' : rooms_form, 'cost_form' : cost_formset }
     return render(request, 'one_room.html', context)
 
@@ -85,13 +82,13 @@ def edit_room(request, room_id, hotel_id):
     cost_formset = cost_factory(request.POST or None, queryset = query)
     if rooms_form.is_valid() and cost_formset.is_valid():
         rooms_form.save()
-        print(cost_formset.cleaned_data)
         for form in cost_formset:
             if form.is_valid():
                 if form.cleaned_data['id'] == None:
                     Cost.objects.create(**form.cleaned_data, room = room)
                 else:
                     form.save()
+        return redirect('/hotel/rooms/' + str(hotel_id))
                 
     context = {
         "rooms_form" : rooms_form, 

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block container %}
+<div class="hero grid-main" >
+  {% include 'navbar.html' %}
+  <form action="#" method="get" class="container">
+    <div class="row">
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" >
+          <div class="form-group base-height" id="holder-1" > 
+            <small id="label" for="input">Dove andiamo?</small>
+            {{ form.city }}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <div class="form-group base-height" id="holder-2"> 
+          <small id="label" for="input">Partenza</small>
+          <input id="datepicker1" type="email" class="form-control input" >
+        </div>
+      </div>
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <div class="form-group base-height" id="holder-2"> 
+          <small id="label" for="input">Ritorno</small>
+          <input type="email" class="form-control input" id="datepicker2">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <div class="form-group base-height" id="holder-2"> 
+          <small id="label" for="input">Quante persone?</small>
+          <input type="email" class="form-control input">
+        </div>
+      </div>
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <div class="form-group base-height" id="holder-2">
+          <input type=submit value=Cerca class="btn btn-lg active btn-block base-height button-color">
+        </div>
+      </div>
+    </div>
+  </form>
+  </div>
+{% endblock %}

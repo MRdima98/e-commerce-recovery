@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Hotels</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="style.css" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker1" ).datepicker();
+  } );
+  </script>
+  <script>
+    $( function() {
+      $( "#datepicker2" ).datepicker();
+    } );
+    </script>
+      <script>
+        $( function() {
+          var availableTags = [
+            "ActionScript",
+            "AppleScript",
+            "Asp",
+            "BASI",
+            "C",
+            "C++",
+            "Clojure",
+            "COBOL",
+            "ColdFusion",
+            "Erlang",
+            "Fortran",
+            "Groovy",
+            "Haskell",
+            "Java",
+            "JavaScript",
+            "Lisp",
+            "Perl",
+            "PHP",
+            "Python",
+            "Ruby",
+            "Scala",
+            "Scheme"
+          ];
+          $( "#search" ).autocomplete({
+            source: availableTags
+          });
+        } );
+        </script>
+</head>
+<body>
+  <div class="hero-banner" >
+      <div class="container">
+          <div class="row header">
+              <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 top-nav ">
+              </div>
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 top-nav" >
+                  <a href="index.html" class="links" >HOTELS</a>
+              </div>
+          </div>
+      </div>
+      <div id="register" class="container register-width">
+          <form >
+            <div class="form-floating col-lg-6">
+                <input id="hotel-name-input" type="text" class="form-control base-height" placeholder="Nome albergo">
+            </div>
+            <div class="form-floating col-lg-6">
+                <input id="IVA-input" type="text" class="form-control base-height" placeholder="IVA">
+            </div>
+            <div class="form-floating col-lg-6">
+              <input  id="via-input" type="text" class="form-control base-height very-light-top-margin" placeholder="Via">
+            </div>
+            <div class="form-floating col-lg-6">
+              <input  id="cell-input" type="text" class="form-control base-height very-light-top-margin" placeholder="Quante stelle">
+            </div>
+            <div class="form-floating col-lg-6">
+                <input  id="costo-input" type="text" class="form-control base-height very-light-top-margin" placeholder="Costo camera">
+            </div>
+            <div class="form-floating col-lg-6">
+                <input  id="quante-camere-input" type="text" class="form-control base-height very-light-top-margin" placeholder="Camere totali">
+            </div>
+            <div class="form-floating col-lg-12">
+                <h4>Opzioni</h4>
+                <div class="col-lg-2">
+                    <input type="checkbox">
+                    <span>Piscina</span>
+                </div>
+                <div class="col-lg-2">
+                    <input type="checkbox">
+                    <span>Piscina</span>
+                </div>
+                <div class="col-lg-2">
+                    <input type="checkbox">
+                    <span>Piscina</span>
+                </div>
+                <div class="col-lg-2">
+                    <input type="checkbox">
+                    <span>Piscina</span>
+                </div>
+                <div class="col-lg-2">
+                    <input type="checkbox">
+                    <span>Piscina</span>
+                </div>
+                <div class="col-lg-2">
+                    <input type="checkbox">
+                    <span>Piscina</span>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <h4>Descrizione</h4>
+                <textarea maxlength='250' id="descrizione" class="form-control light-top-margin no-resize" rows="8" ></textarea>
+            </div>
+            <a id="btn" class="btn btn-lg btn-danger col-lg-4 col-lg-offset-1 light-top-margin" type="submit">Annulla</a>
+            <a href="modifica_struttura.html" id="btn" class="btn btn-lg btn-primary col-lg-4 col-lg-offset-2 light-top-margin" type="submit">Inserisci</a>
+
+        </form>
+      </div>
+    </div>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="datepicker.min.js"></script>
+</body>
+</html> 

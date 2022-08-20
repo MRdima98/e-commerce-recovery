@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  {% include 'blue_navbar.html' %}
+{% endblock %}
+
+{% block content %} 
+  <form method="POST" class='container' enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ cost_form.managment_from }}
+    <div class="row">
+      {% for field in rooms_form %}
+          <div class="col-lg-6 light-top-margin">
+            {{ field.label}}
+            {{ field }}
+          </div>
+      {% endfor %}asdfasdf
+    </div>
+    <div id="cost-row" class="row">
+      {{ cost_form.management_form }}
+      <h4 class="light-top-margin"><span>Costo per periodo</span></h4>
+      <div id="cost-by-time" class='cost_forms'>
+        {% for form in cost_form %}
+          {% for field in form %}
+            {% if field.label == 'Id' %}
+              {{ field }}
+            {% elif field.label == 'End date' %}
+            <div class="col-lg-3 light-top-margin">
+              {{ field }}
+            </div> 
+            <div class="col-lg-offset-1 col-lg-1 light-top-margin">
+              <a href=""  class="btn btn-md btn-danger col-lg-9 base-height center-icon">
+                <ion-icon name="trash-outline" ></ion-icon>
+              </a>
+            </div> 
+            {% else %}
+            <div class="col-lg-3 light-top-margin ">
+              {{ field }}
+            </div>  
+            {% endif %}
+          {% endfor %}
+        {% endfor%}
+      </div>
+    </div>
+    <button id="add-more" type="button" class="btn btn-lg btn-primary col-lg-4 col-lg-offset-2 light-top-margin">Add Period</button>
+    <input type="submit" value="Prossima stanza" class="btn btn-lg btn-primary col-lg-4 col-lg-offset-2 light-top-margin">
+  </form>
+  <div id="cost-by-time-empty" class="hidden">
+    {% for form in cost_form %}
+      {% for field in form %}
+        {% if field.label == 'Id' %}
+          {{ field }}
+        {% else %}
+          <div class="col-lg-4 light-top-margin">
+            {{ field.label }}
+            {{ field }}
+          </div> 
+        {% endif %} 
+      {% endfor %}
+    {% endfor%}
+  </div>
+  <script>
+    const addMoreBtn = document.getElementById('add-more')
+    const totalNewForms = document.getElementById('id_form-TOTAL_FORMS')
+    addMoreBtn.addEventListener('click', add_new_form)
+    
+    function add_new_form(args){
+      if (event) {
+        event.preventDefault()
+      }
+      const currentCostForm = document.getElementsByClassName('cost_forms')
+      let currentFormCount = currentCostForm.length      
+      const formCopyTarget = document.getElementById('cost-row')
+      const formEl = document.getElementById('cost-by-time-empty').cloneNode(true)
+      formEl.setAttribute('class', 'cost_forms')
+      formEl.setAttribute('id', `form-${currentFormCount}`)
+      console.log(formEl.innerHTML)
+      formEl.innerHTML = formEl.innerHTML.replace(/id_form-(.+?)-cost/,'id_form-' + currentFormCount + '-cost')
+      formEl.innerHTML = formEl.innerHTML.replace(/id_form-(.+?)-begin_date/,'id_form-' + currentFormCount + '-begin_date')
+      formEl.innerHTML = formEl.innerHTML.replace(/id_form-(.+?)-end_date/,'id_form-' + currentFormCount + '-end_date')
+      formEl.innerHTML = formEl.innerHTML.replace(/form-(.+?)-cost/,'form-' + currentFormCount + '-cost')
+      formEl.innerHTML = formEl.innerHTML.replace(/form-(.+?)-begin_date/,'form-' + currentFormCount + '-begin_date')
+      formEl.innerHTML = formEl.innerHTML.replace(/form-(.+?)-end_date/,'form-' + currentFormCount + '-end_date')
+      totalNewForms.setAttribute('value', currentFormCount + 1)
+      formCopyTarget.append(formEl)
+    }
+  
+  </script>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block header %}
+{% include 'blue_navbar.html' %}
+{% endblock %}
+
+{% block content %} 
+<div class="container light-top-margin">
+  <div class='col-lg-2'>
+    <a href="/hotel" id="btn" class="btn btn-md btn-primary light-bottom-margin center-icon">Torna indietro</a>
+  </div>
+  <form action="#" method="POST">
+    {% csrf_token %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Modifica</th>
+        </tr>
+      </thead>
+        <tbody>
+          {% for i in rooms_count %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            {% for item in obj %}
+            <td> {{ item.name }} </td>
+            <td>
+              <a href="/hotel/rooms/edit/{{ hotel_id }}&{{ item.id }}" id="btn" class="btn btn-md btn-primary">
+                <ion-icon name="create-outline"></ion-icon>
+              </a>
+            </td>
+            {% endfor%}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <input type="submit" value="Salva" class="btn btn-lg btn-primary col-lg-4 col-lg-offset-2 light-top-margin">
+  </form>
+</div>
+{% endblock %}

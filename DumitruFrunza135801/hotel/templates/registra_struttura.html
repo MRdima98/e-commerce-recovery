@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block header%}
+{% include 'blue_navbar.html' %}
+{% endblock %}
+      
+{% block content %}
+  <div class="container register-width">
+    <form action="#" method="POST"> 
+      {% csrf_token %}
+      {% for field in form %}
+        {% if field.help_text == 'half_row' %}
+          <div class="form-floating col-lg-6 very-light-top-margin"> 
+            {{ field.label }}
+            {{ field }}
+          </div>
+        {% elif field.help_text == 'Svaghi' %}
+          <div class="col-lg-12">
+            <h4>Svaghi</h4>
+            {{ field }}
+          </div>
+        {% elif field.help_text == 'Description' %}
+          <div class="col-lg-12">
+            <h4>Descrizione</h4>
+            {{ field }}
+          </div>
+        {% else %}
+        <div class="col-lg-2">
+          {{ field }}
+          {{ field.label_tag}}
+        </div>
+        {% endif %}
+      {% endfor %}
+      <div class="form-floating col-lg-12">
+        <a href={% url 'hotel_list' %} id="btn" class="btn btn-lg btn-danger col-lg-3 light-top-margin" type="submit">Annulla</a>
+        {% if obj_id %}
+        <a href={% url 'room_list' obj_id %} id="btn" class="btn btn-lg btn-primary col-lg-3 col-lg-offset-1 light-top-margin" type="submit">Stanze</a>
+        {% endif %}
+        <input type="submit" value="Salva" class="btn btn-lg btn-primary col-lg-3 col-lg-offset-1 light-top-margin">
+      </div>
+    </form>
+  </div>
+{% endblock content %}

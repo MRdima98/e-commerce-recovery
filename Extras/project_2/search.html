@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Hotels</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="style.css" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker1" ).datepicker();
+  } );
+  </script>
+  <script>
+    $( function() {
+      $( "#datepicker2" ).datepicker();
+    } );
+    </script>
+      <script>
+        $( function() {
+          var availableTags = [
+            "ActionScript",
+            "AppleScript",
+            "Asp",
+            "BASIC",
+            "C",
+            "C++",
+            "Clojure",
+            "COBOL",
+            "ColdFusion",
+            "Erlang",
+            "Fortran",
+            "Groovy",
+            "Haskell",
+            "Java",
+            "JavaScript",
+            "Lisp",
+            "Perl",
+            "PHP",
+            "Python",
+            "Ruby",
+            "Scala",
+            "Scheme"
+          ];
+          $( "#search" ).autocomplete({
+            source: availableTags
+          });
+        } );
+        </script>
+</head>
+<body>
+  <div class="hero-banner" >
+      <div class="container">
+          <div class="row header">
+              <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 top-nav ">
+              </div>
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 top-nav" >
+                  <a href="index.html" class="links" >HOTELS</a>
+              </div>
+              <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 top-nav">
+                  <a href="" class="links">Mie Prenotazioni</a>
+                  <span>|</span>
+                  <a href="" class="links">Registra la tua struttura </a>
+                  <span>|</span>
+                  <a href="" class="links">Registrati</a>
+                  <span>|</span>
+                  <a href="login.html" class="links">Accedi</a>
+              </div>
+          </div>
+      </div>
+      <div class="find-section container ">
+        <div id="filters" class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+          <div id="main-filters" class="col-lg-12 thin-border">
+            <div class="form-group base-height light-top-margin" id="holder-2"> 
+              <small id="label" for="input">Quante persone?</small>
+              <input type="email" class="form-control input">
+            </div>
+            <div class="form-group base-height" id="holder-2"> 
+              <small id="label" for="input">Partenza</small>
+              <input type="email" class="form-control input" id="datepicker1">
+            </div>
+            <div class="form-group base-height" id="holder-2"> 
+              <small id="label" for="input">Ritorno</small>
+              <input type="email" class="form-control input" id="datepicker2">
+            </div>
+            <div class="form-group base-height" id="holder-2"> 
+              <small id="label" for="input">Quante persone?</small>
+              <input type="email" class="form-control input">
+            </div>
+            <div class="form-group base-height" id="holder-2"> 
+              <a href="search.html" class="btn btn-lg active btn-block base-height button-color" role="button" aria-pressed="true">CERCA</a> 
+            </div>
+          </div>
+          <div id="secondary-filters" class="col-lg-12 thin-border light-top-margin">
+            <div class="row bottom-border">
+              <h4 id="filtra-per" class="light-left-margin filter-font-titles">Filtra per:</h4>
+            </div>
+            <div class="row">
+              <div class="top-border"></div>
+              <h4 class="light-left-margin filter-font-titles-secondary">Servizi</h4>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <input type="checkbox" class="light-left-margin checkbox-dim">
+                <span class="filter-font">Palestra</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="top-border"></div>
+              <h4 class="light-left-margin filter-font-titles-secondary">Stelle</h4>
+            </div>
+
+          </div>
+        </div>
+        
+        <div class="col-lg-9">
+          <div id="single-search-result" class="col-lg-12 thin-border">
+            <div class="col-lg-4 light-top-bot-margin">
+              <img src="resources/home_page.png" alt="" class="img-thumbnail">
+            </div>
+            <div class="col-lg-6 light-top-bot-margin">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe facilis dignissimos beatae assumenda fugiat. Officiis, animi, beatae provident placeat quasi ipsum accusantium praesentium qui velit porro in dolor? Neque, fugiat.
+            </div>
+
+              <div class="col-lg-2 light-top-bot-margin">
+                <span>Prezzo $$$</span>
+                <button class="btn-lg ">
+                  Prenota
+                </button>
+              </div>
+          </div>
+        </div>
+      </div>
+
+  </div>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="datepicker.min.js"></script>
+</body>
+</html> 

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Hotels</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="style.css" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker1" ).datepicker();
+  } );
+  </script>
+  <script>
+    $( function() {
+      $( "#datepicker2" ).datepicker();
+    } );
+    </script>
+      <script>
+        $( function() {
+          var availableTags = [
+            "ActionScript",
+            "AppleScript",
+            "Asp",
+            "BASI",
+            "C",
+            "C++",
+            "Clojure",
+            "COBOL",
+            "ColdFusion",
+            "Erlang",
+            "Fortran",
+            "Groovy",
+            "Haskell",
+            "Java",
+            "JavaScript",
+            "Lisp",
+            "Perl",
+            "PHP",
+            "Python",
+            "Ruby",
+            "Scala",
+            "Scheme"
+          ];
+          $( "#search" ).autocomplete({
+            source: availableTags
+          });
+        } );
+        </script>
+</head>
+<body>
+  <div class="hero-banner" >
+      <div class="container">
+          <div class="row header">
+              <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 top-nav ">
+              </div>
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 top-nav" >
+                  <a href="index.html" class="links" >HOTELS</a>
+              </div>
+          </div>
+      </div>
+      <div id="prenotazione" class="container register-width thin-border">
+        <form>
+              <div class="form-group col-lg-6 light-top-margin">
+                Hotel 1
+              </div>
+              <div class="form-group col-lg-6 light-top-margin">
+                2 Adulti 1 Moccioso
+              </div>
+
+              <div class="form-group col-lg-6">
+                40 euro a notte
+              </div>
+              <div class="form-group col-lg-6">
+                400 euro in totale
+              </div>
+              <div class="form-group col-lg-6">
+                Dal data
+              </div>
+              <div class="form-group col-lg-6">
+                Al data
+              </div>
+              <button id="btn-modifica-prenotazione" class="btn btn-lg btn-primary col-lg-4 light-bottom-margin light-left-margin" type="submit">Modifica</button>
+              <button id="btn-annulla-prenotazione" class="btn btn-lg btn-danger col-lg-4 col-lg-offset-2 light-bottom-margin" type="submit">Cancella</button>
+        </form>
+      </div>
+      <div id="nuova-prenotazione" class="container">
+        <button id="btn-annulla-prenotazione" class="btn btn-lg btn-primary col-lg-3 col-lg-offset-7 light-top-margin" type="submit">Nuova Prenotazione</button>
+      </div>
+    </div>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="datepicker.min.js"></script>
+</body>
+</html> 

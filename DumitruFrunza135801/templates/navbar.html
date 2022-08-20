@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="col-lg-4 col-lg-offset-1 top-nav" >
+    <a href={% url 'home' %} class="links" >HOTELS</a>
+  </div>
+  {% with my_url=request.path%}
+  <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 top-nav">
+    {% if my_url == '/hotel/' %}
+    <a href={% url 'hotel_list'%} class ="links">Le mie strutture<a/>
+    {% elif my_url == '/hotel/list'%}
+    {% else %}
+    <a href="mie_prenotazioni.html" class="links">Mie Prenotazioni</a>
+    <span>|</span>
+    <a href={% url 'struttura' %} class="links">Registra la tua struttura</a>
+    <span>|</span>
+    <a href="register.html" class="links">Registrati</a>
+    <span>|</span>
+    <a href="login.html" class="links">Accedi</a>
+    {% endif %}
+    {% endwith %}
+  </div>
+</div>

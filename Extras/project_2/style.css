@@ -1,0 +1,192 @@
+*{
+    margin: 0;
+    padding: 0;
+} 
+
+body {
+    font-family: sans-serif;
+    margin: 0; 
+}
+
+/*
+-----------HERO SECTION-----------
+*/
+
+.hero{
+    height: 100vh;
+    width: inherit;
+    background-image: url('resources/home-page-2.jpg');
+    background-size:     cover;                    
+    background-repeat:   no-repeat;
+    background-position: center center;
+}
+
+
+.grid-main{
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    align-items: center;
+}
+
+.top-nav{
+    font-size: 20px;
+    margin-top: 8px;
+    color: rgb(243, 224, 192);
+}
+
+.links{
+    color: #fbd9c0;
+    text-decoration: none;
+}
+
+.links:hover{
+    color: #ffd7ba;
+    text-decoration: none;
+}
+
+.base-height{
+    height: 50px;
+}
+
+#label {
+    margin-bottom: -50px;
+    padding-left: 5px;
+    padding-top: 2px;
+    position: absolute;
+    color: #ccc;
+}
+
+.input {
+    height: 100%;
+    padding-bottom: -10px;
+}
+
+.button-color{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fe994a;
+}
+
+.button-color:hover{
+    background-color: #febf6e;
+}
+
+.icon-dim{
+    width: 24px;
+    height: 24px;
+}
+
+/* 
+-----------SEARCH SECTION-----------
+ */
+
+.hero-banner{
+    height: 60px;
+    width: inherit;
+    background-color: #2063a5;
+}
+
+.find-section{
+    display: flex;
+    margin-top: 50px;
+    height: 1000px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.search-grid{
+    display: flex;
+    flex-direction: column;   
+
+}
+
+.thin-border{
+    border: thin solid #2063a5;
+    border-radius: 4px;
+}
+
+.top-border{
+    border-top: thin solid black;
+}
+
+.light-top-margin{
+    margin-top: 15px;
+
+}
+
+.light-left-margin{
+    margin-left: 15px;
+}
+
+.checkbox-dim{
+    width: 18px;
+    height: 18px;
+}
+
+.filter-font-titles{
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.filter-font-titles-secondary{
+    font-weight: 520;
+}
+
+#main-filters{
+    background-color: #2063a5;
+}
+
+.divider{
+    height: 10px;
+}
+
+.light-top-bot-margin{
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+/*
+-----------------LOG IN-------------------
+*/
+
+.log-in-width{
+    margin-top: 100px;
+    width: 300px;
+    align-content: center;
+}
+
+.very-light-top-margin{
+    margin-top: 8px;
+}
+
+
+/* 
+-----------------REGISTER----------------
+*/
+
+.register-width{
+    margin-top: 100px;
+    width: 800px;
+    align-content: center;
+}
+
+
+
+/* 
+-----------------REGISTRA LA TUA STRUTTURA--------------------------------
+*/
+
+.no-resize{
+    resize: none;   
+}
+
+/* 
+-----------------MODIFICA STRUTTURA--------------------------------
+*/
+
+.light-bottom-margin{
+    margin-bottom: 15px;
+}
+
+

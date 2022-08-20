@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="style/seachPageStyle.css" rel="stylesheet" />
+
+    <title>Home page</title>
+  </head>
+  <body>
+        <div class="container">
+          <header>
+              <h1>Booking</h1>
+
+              <nav class="log_container">
+                    <button class="log">
+                      <a href="#" class="log_link">
+                            <span class="log_link_text">Register</span>  
+                        </a>
+                    </button>
+                    <button class="log">
+                        <a href="#" class="log_link">
+                            <span class="log_link_text">Sign in</span> 
+                        </a>  
+                    </button>
+                    <!-- <ion-icon class="settings" name="settings-outline"></ion-icon> -->
+              </nav>
+          </header>
+          
+          <aside>
+              <div class="search-bar">
+                    <h2>Cerca</h2>
+                    <span class="input-text">Destinazione</span>
+                    <input type="text" class="input-data">
+                    <span class="input-text">Check in</span>
+                    <input type="text" class="input-data">
+                    <span class="input-text">Check out</span>
+                    <input type="text" class="input-data">
+                    <span class="input-text">Destinazione</span>
+                    <input type="text" class="input-data">
+                    <button class="cerca">Cerca</button>
+              </div>
+              <div class="filters">
+                    <div class="money-range">
+                        <input type="text" class="input-money">
+                        <input type="text" class="input-money">
+                        <button class="filter-go">Filtra</button>
+                    </div>
+              </div>
+          </aside>
+
+          <main class="main-content">
+              <div class="single-search-result">
+                <img src="img/Roma.jpg" alt="Roma" class="img">
+                <div class="descrizione">
+                    <h4>Titolo</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A incidunt aliquam commodi iste labore officia, numquam illo. Sint sunt reiciendis, harum necessitatibus, ad cupiditate consectetur reprehenderit unde iste suscipit laudantium.</p>
+                </div>
+                <button class="prenota">Prenota</button>
+              </div>
+          </main>
+        </div>
+      <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>

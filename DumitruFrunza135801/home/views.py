@@ -1,9 +1,10 @@
+import datetime
 from threading import local
 from django.shortcuts import render
-from .froms import SearchFrom
+from .forms import SearchFrom
 # Create your views here.
 
-from hotel.models import Hotel, Rooms, Cost
+from hotel.models import Activity, Hotel, Rooms, Cost
 
 def home(request):
     form = SearchFrom()
@@ -20,15 +21,23 @@ def home(request):
     return render(request, "index.html", context)
 
 def search(request, city, start, end, people):
-    form = SearchFrom()
+    form = SearchFrom(
+        initial= {
+            'city' : city,
+            'start' : start,
+            'end' : end,
+            'how_many' : people
+        }
+    )
     hotels = Hotel.objects.filter(city=city)
     rooms = Rooms.objects.filter(people=people, hotel__in = hotels)
-    cost = Cost.objects.filter(begin_date__gte = start, end_date__lte = end,
-    room__in=rooms)
-    
+    cost = Cost.objects.filter(begin_date__gte = start, end_date__lte=end, room__in=rooms)
+    activities = Activity.objects.filter(hotel__in=hotels).values(
+        'one_activity').distinct()
     context = { 
-        'costs' : cost ,
+        'costs' : cost,
         'form' : form,
-        'stelle' : range(5)
+        'stelle' : range(5),
+        'activities' : activities,
     }
     return render(request, "search.html", context)

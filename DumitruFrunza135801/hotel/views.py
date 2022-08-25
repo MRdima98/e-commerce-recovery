@@ -1,12 +1,10 @@
-from contextvars import Context
-from gc import get_objects
-from multiprocessing import context
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, Http404
+from django.http import Http404
 
 from .forms import HotelForm, RoomsForm, CostForm
 from django.forms import formset_factory, modelformset_factory
-from .models import Hotel, Rooms, Cost
+from .models import Hotel, Rooms, Cost, Activity
+import re
 
 def hotel_view(request,*args,**kwargs):
     return render(request,"registra_struttura.html",{})
@@ -40,6 +38,10 @@ def new_hotel(request):
     my_form = HotelForm(request.POST or None)
     if my_form.is_valid():
         hotel = Hotel.objects.create(**my_form.cleaned_data)
+        activities_string = hotel.free_time
+        activities_list = re.compile('\w+').findall(activities_string)
+        for activity in activities_list:
+            Activity.objects.create(hotel=hotel, one_activity=activity)
         return redirect('/hotel/rooms/' + str(hotel.id) + '&1')
     context = { "form" : my_form }
     return render(request, 'registra_struttura.html', context )

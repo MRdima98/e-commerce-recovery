@@ -19,10 +19,12 @@
         <h4 class="light-left-margin filter-font-titles-secondary">Servizi</h4>
       </div>
       <div class="row">
-        <div class="col-lg-12">
-          <input type="checkbox" class="light-left-margin checkbox-dim">
-          <span class="filter-font">Palestra</span>
-        </div>
+        {% for activity in activities %}
+          <div class="col-lg-12">
+            <input type="checkbox" class="light-left-margin checkbox-dim">
+            <span class="filter-font">{{ activity.one_activity }}</span>
+          </div>
+        {% endfor%}
       </div>
       <div class="row">
         <div class="top-border"></div>

@@ -1,3 +1,4 @@
+from threading import local
 from django.shortcuts import render
 from .froms import SearchFrom
 # Create your views here.
@@ -19,15 +20,15 @@ def home(request):
     return render(request, "index.html", context)
 
 def search(request, city, start, end, people):
-    hotels = Hotel.objects.filter(city = city) 
-    print(hotels)
-    for hotel in hotels:
-        rooms = Rooms.objects.filter(hotel = hotel, 
-        people=people).select_related('hotel')
-    print(rooms)
-    for room in rooms: 
-        cost = Cost.objects.filter(room=room, begin_date__gt=start, end_date__lt=end).select_related('room')
-    context = {
-        'costs' : cost
+    form = SearchFrom()
+    hotels = Hotel.objects.filter(city=city)
+    rooms = Rooms.objects.filter(people=people, hotel__in = hotels)
+    cost = Cost.objects.filter(begin_date__gte = start, end_date__lte = end,
+    room__in=rooms)
+    
+    context = { 
+        'costs' : cost ,
+        'form' : form,
+        'stelle' : range(5)
     }
     return render(request, "search.html", context)

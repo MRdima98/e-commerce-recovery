@@ -27,6 +27,11 @@
       <div class="row">
         <div class="top-border"></div>
         <h4 class="light-left-margin filter-font-titles-secondary">Stelle</h4>
+        {% for e in stelle %}
+          <div class="col-lg-12">
+            <span>{{ e }}</span>
+          </div>
+        {% endfor %}
       </div>
     </div>
   </div>

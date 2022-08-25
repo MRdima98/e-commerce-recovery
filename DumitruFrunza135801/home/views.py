@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .froms import SearchFrom
 # Create your views here.
 
-from hotel.models import Hotel, Rooms
+from hotel.models import Hotel, Rooms, Cost
 
 def home(request):
     form = SearchFrom()
@@ -19,12 +19,15 @@ def home(request):
     return render(request, "index.html", context)
 
 def search(request, city, start, end, people):
-    hotel = Hotel.objects.filter(city = city) 
-    rooms = Rooms.objects.filter(hotel = hotel[0])
-    print(hotel)
+    hotels = Hotel.objects.filter(city = city) 
+    print(hotels)
+    for hotel in hotels:
+        rooms = Rooms.objects.filter(hotel = hotel, 
+        people=people).select_related('hotel')
+    print(rooms)
+    for room in rooms: 
+        cost = Cost.objects.filter(room=room, begin_date__gt=start, end_date__lt=end).select_related('room')
     context = {
-        'rooms' : rooms,
-        'results' : range(len(hotel)),
-        'hotel' : hotel 
+        'costs' : cost
     }
     return render(request, "search.html", context)

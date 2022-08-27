@@ -1,6 +1,9 @@
 import datetime
+from random import choices
 from threading import local
 from django.shortcuts import render
+
+from hotel.forms import ActivityForm
 from .forms import SearchFrom
 # Create your views here.
 
@@ -35,10 +38,14 @@ def search(request, city, start, end, people):
         room__in=rooms)
     activities = Activity.objects.filter(hotel__in=hotels).values(
         'one_activity').distinct()
+    activities_form = ActivityForm(data=activities.values)
+
+    print(activities)
     context = { 
         'costs' : cost,
         'form' : form,
         'stelle' : range(5),
         'activities' : activities,
+        'activities_form' : activities_form
     }
     return render(request, "search.html", context)

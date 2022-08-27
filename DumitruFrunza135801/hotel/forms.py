@@ -1,8 +1,10 @@
 from datetime import date
 from distutils.command.upload import upload
 from pickletools import decimalnl_long
-from tkinter import W
+from tkinter import W, Widget
 from django import forms
+
+from hotel.models import Activity
 
 from .models import Hotel, Rooms, Cost
 
@@ -89,3 +91,10 @@ class CostForm(forms.ModelForm):
             'begin_date',
             'end_date'
         ] 
+
+class ActivityForm(forms.ModelForm): 
+    one_activity = forms.MultipleChoiceField(widget  = forms.CheckboxSelectMultiple)
+
+    class Meta:
+        model = Activity 
+        fields = [ 'one_activity' ]

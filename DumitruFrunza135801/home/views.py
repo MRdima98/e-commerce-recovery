@@ -31,7 +31,8 @@ def search(request, city, start, end, people):
     )
     hotels = Hotel.objects.filter(city=city)
     rooms = Rooms.objects.filter(people=people, hotel__in = hotels)
-    cost = Cost.objects.filter(begin_date__gte = start, end_date__lte=end, room__in=rooms)
+    cost = Cost.objects.filter(begin_date__lte = start, end_date__gte=end,
+        room__in=rooms)
     activities = Activity.objects.filter(hotel__in=hotels).values(
         'one_activity').distinct()
     context = { 

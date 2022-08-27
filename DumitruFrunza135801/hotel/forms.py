@@ -89,3 +89,6 @@ class CostForm(forms.ModelForm):
             'begin_date',
             'end_date'
         ] 
+
+class ActivityForm(forms.ModelForm): 
+    pass

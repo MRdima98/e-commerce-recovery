@@ -1,9 +1,11 @@
+import operator
 from django.shortcuts import render
-from django.forms import formset_factory, modelformset_factory
+from django.db.models import Q
 
 from .forms import SearchFrom
 from hotel.forms import ActivityForm
 from hotel.models import Activity, Hotel, Rooms, Cost
+from functools import reduce
 
 def home(request):
     form = SearchFrom()
@@ -31,15 +33,25 @@ def search(request, city, start, end, people):
     activities = Activity.objects.all().values('one_activity').distinct()
     checked_activities = request.GET.getlist('activities')
     if checked_activities:
-        hotels = Hotel.objects.filter(city=city, 
-        activity__one_activity__in=checked_activities)
+        act = Activity.objects.filter(one_activity__in=checked_activities)
+        hotel_ids = {}
+        for item in act:
+            id=item.hotel.id
+            if id in hotel_ids:
+                hotel_ids[id] = hotel_ids[id] + 1
+            else:
+                hotel_ids[id]=1
+        for (_) in list(hotel_ids):
+            if hotel_ids[_] != len(checked_activities):
+                hotel_ids.pop(_)
+        hotels = Hotel.objects.filter(city=city, id__in=hotel_ids)
     else:
         hotels = Hotel.objects.filter(city=city)
+
     rooms = Rooms.objects.filter(people=people, hotel__in = hotels)
     cost = Cost.objects.filter(begin_date__lte = start, end_date__gte=end,
         room__in=rooms)
     
-    print(request.GET.getlist('activities'))
     context = { 
         'costs' : cost,
         'form' : form,

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import Http404
-
+from django.contrib.auth.decorators import login_required
 from .forms import HotelForm, RoomsForm, CostForm
 from django.forms import formset_factory, modelformset_factory
 from .models import Hotel, Rooms, Cost, Activity
@@ -40,6 +40,7 @@ def delete_hotel(request, id):
     hotel.delete()
     return redirect('/hotel/list')
 
+@login_required
 def new_hotel(request):
     my_form = HotelForm(request.POST or None)
     if my_form.is_valid():

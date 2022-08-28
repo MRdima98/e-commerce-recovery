@@ -5,8 +5,9 @@
 {% endblock %}
 
 {% block content %}
-  <form class="container" method="post" action="">
+  <form class="container" method="post" action="" >
     {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}">
     <div class="row big-top-margin">
       <div class="col-lg-8 col-lg-offset-2">
         {% for field in form %}

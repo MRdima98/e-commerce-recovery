@@ -232,3 +232,7 @@ body {
     display: flex;
     justify-content: flex-end;
 }
+
+.big-top-margin{
+    margin-top: 75px;
+}

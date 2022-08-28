@@ -2,12 +2,24 @@ from calendar import firstweekday
 from email import message
 from multiprocessing import context
 from django.shortcuts import render
-from .forms import RegisterForm
+from .forms import RegisterForm, LogInForm
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 from django.contrib import messages
 
 def log_in(request):
-    return render(request, 'log_in.html', {})
+    log_in_form = LogInForm(request.POST or None)
+    if log_in_form.is_valid():
+        user = authenticate(
+            username = log_in_form.cleaned_data['username'],
+            password = log_in_form.cleaned_data['passwd']
+            )
+        if user is not None:
+            print('yes')
+        else:
+            print('NO')
+    context = { 'form' : log_in_form }
+    return render(request, 'log_in.html', context)
 
 def register(request):
     register_form = RegisterForm(request.POST or None)
@@ -21,7 +33,6 @@ def register(request):
                 password = register_form.cleaned_data['passwd'],
             )
         else: 
-            print('nope')
             messages.error(request, 'Le password non coincidono')
     
     context = { 'form' : register_form }

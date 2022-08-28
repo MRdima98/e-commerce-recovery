@@ -5,13 +5,21 @@
 {% endblock %}
 
 {% block content %}
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
+  <form class="container" method="post" action="">
+    {% csrf_token %}
+    <div class="row big-top-margin">
+      <div class="col-lg-8 col-lg-offset-2">
+        {% for field in form %}
         <div class="col-lg-6">
-          forms
+          {{field.label}}
+          {{field}}
+        </div>
+        {% endfor %}
+        <div class="col-lg-12 stick-to-end ">
+          <button class="btn btn-lg btn-danger">Annulla</button>
+          <button class="btn btn-lg btn-primary light-left-margin">Entra</button>
         </div>
       </div>
     </div>
-  </div>
+  </fo>
 {% endblock %}

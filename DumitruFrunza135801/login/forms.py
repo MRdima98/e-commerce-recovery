@@ -17,3 +17,11 @@ class RegisterForm(forms.Form):
             'type' : 'password'}))
     name = forms.CharField(label='Nome', widget=base_widget)
     surname = forms.CharField(label='Cognome', widget=base_widget)
+
+class LogInForm(forms.Form):
+    username = forms.CharField(label='Nome utente', 
+        widget=forms.TextInput({'class': 'form-control base-height light-bottom-margin'}))
+    passwd = forms.CharField(label='Password', widget=forms.TextInput({
+        'class': 'form-control base-height light-bottom-margin',
+        'type' : 'password'
+    }))

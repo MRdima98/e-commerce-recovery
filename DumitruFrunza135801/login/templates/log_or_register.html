@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  {% include 'blue_navbar.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="container log-in-container">
+  <div>
+    <a href={% url 'register'%} class="btn btn-lg btn-primary">Registrati</a>
+    <span>oppure</span>
+    <a href={% url 'log_in'%} class="btn btn-lg btn-primary">Accedi</a>
+  </div>
+</div>
+{% endblock %}

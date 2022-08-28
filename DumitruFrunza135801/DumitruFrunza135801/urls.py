@@ -19,13 +19,13 @@ from django.urls import path
 from hotel.views import new_hotel, struttura, hotel_list, delete_hotel
 from hotel.views import add_edit_room, room_list, edit_room
 from home.views import home, search
+from login.views import log_in, register, log_or_register
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
+    # path('search/<str:city>',search, name='search'),
     path('', home, name='home'),
-    path('search/<str:city>',search, name='search'),
-
     path('hotel/', new_hotel, name='struttura'),
     path('struttura/<int:id>/', struttura),
     path('hotel/list', hotel_list, name="hotel_list"),
@@ -35,4 +35,7 @@ urlpatterns = [
     path('hotel/rooms/<int:hotel_id>', room_list, name='room_list'),
     path('hotel/rooms/edit/<int:hotel_id>&<int:room_id>',
         edit_room, name='edit_room'),
+    path('log_or_register/', log_or_register, name='log_or_register'),
+    path('register/', register, name='register'),
+    path('log_in/', log_in, name='log_in'),
 ]

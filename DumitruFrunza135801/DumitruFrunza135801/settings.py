@@ -62,6 +62,7 @@ TEMPLATES = [
             [
             Path.joinpath(BASE_DIR,"templates"),
             Path.joinpath(BASE_DIR,"hotel","templates"),
+            Path.joinpath(BASE_DIR,"login","templates"),
             Path.joinpath(BASE_DIR,"home","templates")
             ],
         'APP_DIRS': True,

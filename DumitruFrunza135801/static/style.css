@@ -199,11 +199,19 @@ body {
     visibility: hidden;
 }
 
+.log-in-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+
+}
+
 .hidden-delete-height{
     height: 17px;
 }
 
-.text {
+.text{
     display: block;
     display: -webkit-box;
     max-width: 400px;

@@ -227,3 +227,8 @@ body {
 .max-width{
     max-width: 50px;
 }
+
+.stick-to-end{
+    display: flex;
+    justify-content: flex-end;
+}

@@ -1,13 +1,11 @@
-import datetime
-from random import choices
-from threading import local
+import operator
 from django.shortcuts import render
+from django.db.models import Q
 
-from hotel.forms import ActivityForm
 from .forms import SearchFrom
-# Create your views here.
-
+from hotel.forms import ActivityForm
 from hotel.models import Activity, Hotel, Rooms, Cost
+from functools import reduce
 
 def home(request):
     form = SearchFrom()
@@ -32,20 +30,33 @@ def search(request, city, start, end, people):
             'how_many' : people
         }
     )
-    hotels = Hotel.objects.filter(city=city)
+    activities = Activity.objects.all().values('one_activity').distinct()
+    checked_activities = request.GET.getlist('activities')
+    if checked_activities:
+        act = Activity.objects.filter(one_activity__in=checked_activities)
+        hotel_ids = {}
+        for item in act:
+            id=item.hotel.id
+            if id in hotel_ids:
+                hotel_ids[id] = hotel_ids[id] + 1
+            else:
+                hotel_ids[id]=1
+        for (_) in list(hotel_ids):
+            if hotel_ids[_] != len(checked_activities):
+                hotel_ids.pop(_)
+        hotels = Hotel.objects.filter(city=city, id__in=hotel_ids)
+    else:
+        hotels = Hotel.objects.filter(city=city)
+
     rooms = Rooms.objects.filter(people=people, hotel__in = hotels)
     cost = Cost.objects.filter(begin_date__lte = start, end_date__gte=end,
         room__in=rooms)
-    activities = Activity.objects.filter(hotel__in=hotels).values(
-        'one_activity').distinct()
-    activities_form = ActivityForm(data=activities.values)
-
-    print(activities)
+    
     context = { 
         'costs' : cost,
         'form' : form,
         'stelle' : range(5),
         'activities' : activities,
-        'activities_form' : activities_form
+        'checked_activities' : checked_activities,
     }
     return render(request, "search.html", context)

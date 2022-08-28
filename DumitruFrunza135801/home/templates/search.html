@@ -19,14 +19,18 @@
         <h4 class="light-left-margin filter-font-titles-secondary">Servizi</h4>
       </div>
       <div class="row">
-        {% for activity in activities_form %}
+        {% for activity in activities %}
           <div class="col-lg-12">
-            {{ activity }}
-            <span class="filter-font">.</span>
+            {% if activity.one_activity in checked_activities %}
+              <input id="{{activity.one_activity}}" value="{{activity.one_activity}}" type="checkbox" checked name="activities" class="light-left-margin checkbox-dim">
+            {% else %}
+              <input id="{{activity.one_activity}}" value="{{activity.one_activity}}" type="checkbox" name="activities" class="light-left-margin checkbox-dim">
+            {% endif %}
+            <span class="filter-font">{{ activity.one_activity }}</span>
           </div>
-        {% endfor%}
+          {% endfor%}
       </div>
-      <div class="row">
+      {% comment %} <div class="row">
         <div class="top-border"></div>
         <h4 class="light-left-margin filter-font-titles-secondary">Stelle</h4>
         {% for e in stelle %}
@@ -34,7 +38,7 @@
             <span>{{ e }}</span>
           </div>
         {% endfor %}
-      </div>
+      </div> {% endcomment %}
     </div>
   </div>
 

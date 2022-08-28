@@ -11,16 +11,22 @@ def hotel_view(request,*args,**kwargs):
 
 def struttura(request, id):
     try:
-        obj = Hotel.objects.get(id = id)
+        hotel = Hotel.objects.get(id = id)
     except Hotel.DoesNotExist:
         raise Http404
-    form = HotelForm(request.POST or None, instance=obj)
+    form = HotelForm(request.POST or None, instance=hotel)
+
     if form.is_valid():
+        activities_string = hotel.free_time
+        activities_list = re.compile('\w+').findall(activities_string)
+        for activity in activities_list:
+            if not Activity.objects.filter(hotel=hotel, one_activity=activity):
+                Activity.objects.create(hotel=hotel, one_activity=activity)
         form.save()
         return redirect('/hotel/list')
     context = {
         "form": form,
-        "obj_id" : obj.id
+        "obj_id" : hotel.id
     }
     return render(request, "registra_struttura.html", context)
 

@@ -30,6 +30,7 @@ def search(request, city, start, end, people):
             'how_many' : people
         }
     )
+
     activities = Activity.objects.all().values('one_activity').distinct()
     checked_activities = request.GET.getlist('activities')
     if checked_activities:
@@ -49,13 +50,18 @@ def search(request, city, start, end, people):
         hotels = Hotel.objects.filter(city=city)
 
     rooms = Rooms.objects.filter(people=people, hotel__in = hotels)
-    cost = Cost.objects.filter(begin_date__lte = start, end_date__gte=end,
-        room__in=rooms)
+    cost = Cost.objects.filter(begin_date__lte = start, end_date__gte = end,
+        room__in=rooms).order_by('-cost')
     
+    week_cost = []
+    for _ in cost: 
+        week_cost.append((end-start).days*_.cost)
+        
+    cost = zip(cost,week_cost)
     context = { 
         'costs' : cost,
         'form' : form,
-        'stelle' : range(5),
+        # 'stelle' : range(5),
         'activities' : activities,
         'checked_activities' : checked_activities,
     }

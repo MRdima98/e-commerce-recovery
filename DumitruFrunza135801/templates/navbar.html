@@ -12,9 +12,9 @@
     <span>|</span>
     <a href={% url 'struttura' %} class="links">Registra la tua struttura</a>
     <span>|</span>
-    <a href="register.html" class="links">Registrati</a>
+    <a href={% url 'register' %} class="links">Registrati</a>
     <span>|</span>
-    <a href="login.html" class="links">Accedi</a>
+    <a href={% url 'log_in' %} class="links">Accedi</a>
     {% endif %}
     {% endwith %}
   </div>

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  {% include 'blue_navbar.html' %}
+{% endblock %}
+
+{% block content %}
+  <form method="post" action="" class="container center-icon light-top-margin">
+    {% csrf_token %}
+    {% if messages %}
+    <div class="row ">
+      <div class="messages col-lg-12">
+        {% for message in messages %}
+        <div class="col-lg-12">
+          <div{% if message.tags %} class="{{ message.tags }}  alert alert-danger "{% endif %}>{{ message }}</div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <div class="col-lg-12">
+        {% for field in form %}
+          <div class="col-lg-6">
+            {{ field.label }}
+            {{ field }}
+          </div>
+        {% endfor %}
+        <div class="col-lg-12 stick-to-end">
+          <button class="btn btn-lg btn-danger">Annulla</button>
+          <button class="btn btn-lg btn-primary light-left-margin">Registrati</button>
+        </div>
+
+      </div>
+    </div>
+  </form>
+{% endblock %}

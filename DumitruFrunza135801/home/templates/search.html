@@ -43,7 +43,7 @@
   </div>
 
   <div class="col-lg-9">
-      {% for cost in costs %}
+      {% for cost, week_cost in costs %}
         <div id="single-search-result" class="row thin-border light-bottom-margin">
           <div class="col-lg-4 light-top-bot-margin">
             <img src="{{ cost.room.photo }}" alt="" class="img-thumbnail">
@@ -53,7 +53,7 @@
             <span class="overflow-auto">{{ cost.room.description }}</span>
           </div>
           <div class="col-lg-2 light-top-bot-margin">
-              <span>{{ cost.cost }}</span>
+              <span>{{ week_cost }}</span>
               <button class="btn-lg ">Prenota</button>
           </div>
         </div>

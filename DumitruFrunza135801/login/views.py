@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .forms import RegisterForm, LogInForm
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 
@@ -13,8 +13,8 @@ def log_in(request):
             password = log_in_form.cleaned_data['passwd']
         )
         if user is not None:
+            login(request, user)
             next = request.GET.get('next', '/')
-            print('link',next)
             return HttpResponseRedirect(next)
         else:
             print('NO')

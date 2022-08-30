@@ -46,15 +46,24 @@
       {% for cost, week_cost in costs %}
         <div id="single-search-result" class="row thin-border light-bottom-margin">
           <div class="col-lg-4 light-top-bot-margin">
-            <img src="{{ cost.room.photo }}" alt="" class="img-thumbnail">
-            {{ cost.room.hotel.name }}
+            <div class="col-lg-8 center-icon">
+              <img src="{{ cost.room.photo }}" alt="" class="img-thumbnail col-lg-offset-1">
+            </div>
+            <div class="col-lg-8 center-icon light-top-margin">
+                {{ cost.room.hotel.name }}
+            </div>
           </div>
           <div class="col-lg-6 light-top-bot-margin text-wrap overflow-auto">
-            <span class="overflow-auto">{{ cost.room.description }}</span>
+            <span> {{cost.room.hotel.street}} </span>
+            <span class="text light-top-margin">{{ cost.room.description }}</span>
           </div>
           <div class="col-lg-2 light-top-bot-margin">
-              <span>{{ week_cost }}</span>
+            <div class="row center-icon">
+              <span>{{ week_cost }} &euro;</span>
+            </div>
+            <div class="row center-icon">
               <a href="{% url 'reserve_room' cost_id=cost.id start=string_start end=string_end %}"class="btn-lg btn-primary light-top-margin">Prenota</a>
+            </div>
           </div>
         </div>
       {% endfor %}

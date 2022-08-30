@@ -8,7 +8,7 @@
     <a href={% url 'hotel_list'%} class ="links">Le mie strutture<a/>
     {% elif my_url == '/hotel/list'%}
     {% else %}
-    <a href="mie_prenotazioni.html" class="links">Mie Prenotazioni</a>
+    <a href={% url 'my_reservations' %} class="links">Mie Prenotazioni</a>
     <span>|</span>
     <a href={% url 'struttura' %} class="links">Registra la tua struttura</a>
     <span>|</span>

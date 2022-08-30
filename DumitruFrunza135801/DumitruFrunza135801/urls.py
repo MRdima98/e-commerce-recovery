@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from hotel.views import new_hotel, struttura, hotel_list, delete_hotel
-from hotel.views import add_edit_room, room_list, edit_room, reserve_room
+from hotel.views import add_edit_room, room_list, edit_room, reserve_room, my_reservations
 from home.views import home, search
 from login.views import log_in, register, log_or_register
 
@@ -39,4 +39,5 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('log_in/', log_in, name='log_in'),
     path('reserve_room/<int:cost_id>&<str:start>&<str:end>', reserve_room, name='reserve_room'),
+    path('my_reservations', my_reservations, name='my_reservations'),
 ]

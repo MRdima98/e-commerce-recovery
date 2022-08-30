@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  {% include 'blue_navbar.html' %}
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    {% csrf_token %}
+    <div class="container">
+      {% for res in query %}
+      <div class="row light-bottom-margin">
+        {{ res.user }}
+        {{ res.hotel.name }}
+        {{ res.begin_date }}
+        {{ res.end_date }}
+        {{ res.total_cost }}
+      </div>
+      <div class="row light-top-margin">
+        <div class="col-lg-6"><a class="btn-lg btn-danger">Elimina</a></div>
+        <div class="col-lg-6"><a class="btn-lg btn-primary">Modifica</a></div>
+      </div>
+      {% endfor %}
+    </div>
+  </form>
+{% endblock %}

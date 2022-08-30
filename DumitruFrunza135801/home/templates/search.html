@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<form class="find-section container" action="#" method="get">
+<form class="find-section container" action="" method="get">
   <div id="filters" class="col-lg-3">
     <div id="main-filters" class="col-lg-12 thin-border">
       {% include 'search_bar.html' %}
@@ -54,7 +54,7 @@
           </div>
           <div class="col-lg-2 light-top-bot-margin">
               <span>{{ week_cost }}</span>
-              <button class="btn-lg ">Prenota</button>
+              <a href="{% url 'reserve_room' cost_id=cost.id start=string_start end=string_end %}"class="btn-lg btn-primary light-top-margin">Prenota</a>
           </div>
         </div>
       {% endfor %}

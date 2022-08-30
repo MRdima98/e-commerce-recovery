@@ -1,3 +1,4 @@
+from datetime import datetime
 import operator
 from django.shortcuts import render
 from django.db.models import Q
@@ -56,7 +57,9 @@ def search(request, city, start, end, people):
     week_cost = []
     for _ in cost: 
         week_cost.append((end-start).days*_.cost)
-        
+
+    string_start = str(start)
+    string_end = str(end)
     cost = zip(cost,week_cost)
     context = { 
         'costs' : cost,
@@ -64,5 +67,7 @@ def search(request, city, start, end, people):
         # 'stelle' : range(5),
         'activities' : activities,
         'checked_activities' : checked_activities,
+        'string_start' : string_start, 
+        'string_end' : string_end
     }
     return render(request, "search.html", context)

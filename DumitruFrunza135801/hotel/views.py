@@ -1,6 +1,7 @@
+from datetime import datetime
 from django.shortcuts import render, redirect
 from django.http import Http404
-
+from django.contrib.auth.decorators import login_required
 from .forms import HotelForm, RoomsForm, CostForm
 from django.forms import formset_factory, modelformset_factory
 from .models import Hotel, Rooms, Cost, Activity
@@ -40,6 +41,7 @@ def delete_hotel(request, id):
     hotel.delete()
     return redirect('/hotel/list')
 
+@login_required
 def new_hotel(request):
     my_form = HotelForm(request.POST or None)
     if my_form.is_valid():
@@ -105,3 +107,18 @@ def edit_room(request, room_id, hotel_id):
     }
 
     return render(request, 'one_room.html', context)
+
+@login_required
+def reserve_room(request, cost_id, start, end):
+    start_date = datetime.strptime(start, '%Y-%m-%d').date()
+    end_date = datetime.strptime(end, '%Y-%m-%d').date()
+    cost = Cost.objects.get(id=cost_id)
+    week_cost = (end_date-start_date).days*cost.cost
+    context = {
+        'start' : start_date,
+        'end' : end_date,
+        'cost' : cost,
+        'user' : request.user,
+        'week_cost' : week_cost
+    }
+    return render(request, 'one_reservation.html', context)

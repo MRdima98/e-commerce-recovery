@@ -1,6 +1,7 @@
 from tkinter import CASCADE
 from unicodedata import decimal
 from django.db import models
+from django.contrib.auth.models import User
 
 class Hotel(models.Model):
     name        = models.TextField()
@@ -30,3 +31,10 @@ class Cost(models.Model):
 class Activity(models.Model):
     hotel = models.ForeignKey(Hotel, on_delete = models.CASCADE)
     one_activity = models.TextField()
+
+class Reservation(models.Model):
+    user = models.ForeignKey(User, on_delete= models.CASCADE)
+    hotel = models.ForeignKey(Hotel, on_delete = models.CASCADE)
+    begin_date = models.DateField()
+    end_date = models.DateField()
+    total_cost = models.DecimalField(max_digits = 10, decimal_places=2)

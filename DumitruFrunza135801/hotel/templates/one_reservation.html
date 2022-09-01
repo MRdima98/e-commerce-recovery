@@ -5,15 +5,22 @@
 {% endblock %}
 
 {% block content %}
-  <div class="container">
+  <form class="container" method="post" action=''>
+    {% csrf_token %}
     <div class="row">
-      <div class="col-lg-12">Albero: {{ cost.room.hotel.name}}</div>
+      <div class="col-lg-12">Albero: {{ cost.room.hotel.name }}</div>
       <div class="col-lg-12">Periodo: {{ start }} - {{ end }}</div>
       <div class="col-lg-12">Totale: {{ week_cost }}</div>
+      <input value="{{ cost.id}}" checked name="cost_id" class="hidden">
+      <input value="{{ start }}" checked name="start" class="hidden">
+      <input value="{{ end}}" checked name="end" class="hidden">
+      <input value="{{ week_cost}}" checked name="week_cost" class="hidden">
     </div>
     <div class="row light-top-margin">
       <div class="col-lg-6"><a class="btn-lg btn-danger">Annulla</a></div>
-      <div class="col-lg-6"><a class="btn-lg btn-primary">Conferma</a></div>
+      <div class="col-lg-6">
+        <input class="btn-lg btn-primary" type="submit" value="Conferma"></input>
+      </div>
     </div>
-  </div>
+  </form>
 {% endblock %}

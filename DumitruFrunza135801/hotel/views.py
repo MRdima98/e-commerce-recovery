@@ -1,10 +1,13 @@
+from calendar import week
 from datetime import datetime
+from functools import total_ordering
+from pickletools import read_uint1
 from django.shortcuts import render, redirect
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from .forms import HotelForm, RoomsForm, CostForm
 from django.forms import formset_factory, modelformset_factory
-from .models import Hotel, Rooms, Cost, Activity
+from .models import Hotel, Reservation, Rooms, Cost, Activity
 import re
 
 def hotel_view(request,*args,**kwargs):
@@ -121,4 +124,24 @@ def reserve_room(request, cost_id, start, end):
         'user' : request.user,
         'week_cost' : week_cost
     }
+    if request.POST:
+        cost = Cost.objects.get(id = request.POST['cost_id'])
+        print(cost.room.hotel)
+        Reservation.objects.create(
+            user = request.user,
+            hotel = cost.room.hotel,
+            begin_date = start,
+            end_date = end,
+            total_cost = week_cost
+        )
+        return render(request, 'reservation_list.html')
     return render(request, 'one_reservation.html', context)
+
+@login_required
+def my_reservations(request):
+    reservations = Reservation.objects.filter(user=request.user)
+    print(reservations)
+    context={   
+        'query' : reservations
+    }
+    return render(request, 'reservation_list.html', context)

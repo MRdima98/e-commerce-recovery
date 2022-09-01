@@ -26,7 +26,7 @@ class Cost(models.Model):
     room = models.ForeignKey(Rooms, on_delete=models.CASCADE)
     cost = models.DecimalField(max_digits=5, decimal_places=2)
     begin_date = models.DateField()
-    end_date = models.DateField() 
+    end_date = models.DateField()
 
 class Activity(models.Model):
     hotel = models.ForeignKey(Hotel, on_delete = models.CASCADE)

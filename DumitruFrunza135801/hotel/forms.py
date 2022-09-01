@@ -48,13 +48,13 @@ class HotelForm(forms.ModelForm):
 
 class RoomsForm(forms.ModelForm):
     attr= {'class': 'form-control base-height'}
-    name = forms.CharField(label='Nome camera' , max_length =50, 
+    name = forms.CharField(label='Nome camera' , max_length = 50, 
         widget = forms.TextInput(attr))
     people = forms.DecimalField(label = None, 
         widget=forms.TextInput(attr))
     size = forms.DecimalField(label = None, 
         widget=forms.TextInput(attr))
-    description = forms.CharField(label = None, 
+    description = forms.CharField(label = None, max_length = 200, 
         widget=forms.TextInput(attr))
     photo = forms.FileField(label='Foto')
 
@@ -92,4 +92,3 @@ class ActivityForm(forms.Form):
     my_field = forms.MultipleChoiceField(choices=ACTIVITIES, 
         widget=forms.CheckboxSelectMultiple()
     )
-

@@ -18,7 +18,7 @@ from django.urls import path
 
 from hotel.views import new_hotel, struttura, hotel_list, delete_hotel, my_reservations
 from hotel.views import add_edit_room, room_list, edit_room, reserve_room 
-from hotel.views import delete_reservation, update_reservation
+from hotel.views import delete_reservation, update_reservation, wait_line
 from home.views import home, search
 from login.views import log_in, register, log_or_register
 
@@ -43,4 +43,9 @@ urlpatterns = [
     path('my_reservations', my_reservations, name='my_reservations'),
     path('delete_reservation/<int:res_id>', delete_reservation, name='delete_reservation'),
     path('update_reservation/<int:res_id>', update_reservation, name='update_reservation'),
+    path(
+        'wait_line/<str:start>&<str:end>&<int:people>&<str:city>', 
+        wait_line, 
+        name='wait_line'
+    ),
 ]

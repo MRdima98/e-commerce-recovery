@@ -23,6 +23,7 @@ def home(request):
     return render(request, "index.html", context)
 
 def search(request, city, start, end, people):
+    print('ciao')
     form = SearchFrom(
         initial= {
             'city' : city,
@@ -73,6 +74,7 @@ def search(request, city, start, end, people):
 
     string_start = str(start)
     string_end = str(end)
+    search = 'empty' if not bool(cost) else ''
     cost = zip(cost,week_cost)
     context = { 
         'costs' : cost,
@@ -81,6 +83,8 @@ def search(request, city, start, end, people):
         'checked_activities' : checked_activities,
         'string_start' : string_start, 
         'string_end' : string_end,
-        'is_empty?' : bool(cost)
+        'search' : search,
+        'people' : people,
+        'city' : city
     }
     return render(request, "search.html", context)

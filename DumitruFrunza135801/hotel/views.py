@@ -183,3 +183,9 @@ def update_reservation(request, res_id):
         'raw_end_date' : raw_end_date,
     }
     return render(request, 'edit_reservation.html', context)
+
+@login_required
+def wait_line(request, start, end, people, city):
+    print(request.POST)
+    context = {}
+    return render(request, 'wait_line.html', context)

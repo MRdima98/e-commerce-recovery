@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<form class="find-section container" action="" method="get">
+<form id='form1' class="find-section container" action="" method="get">
   <div id="filters" class="col-lg-3">
     <div id="main-filters" class="col-lg-12 thin-border">
       {% include 'search_bar.html' %}
@@ -30,43 +30,40 @@
           </div>
           {% endfor%}
       </div>
-      {% comment %} <div class="row">
-        <div class="top-border"></div>
-        <h4 class="light-left-margin filter-font-titles-secondary">Stelle</h4>
-        {% for e in stelle %}
-          <div class="col-lg-12">
-            <span>{{ e }}</span>
-          </div>
-        {% endfor %}
-      </div> {% endcomment %}
     </div>
   </div>
 
   <div class="col-lg-9">
-      {% for cost, week_cost in costs %}
-        <div id="single-search-result" class="row thin-border light-bottom-margin">
-          <div class="col-lg-4 light-top-bot-margin">
-            <div class="col-lg-8 center-icon">
-              <img src="{{ cost.room.photo }}" alt="" class="img-thumbnail col-lg-offset-1">
-            </div>
-            <div class="col-lg-8 center-icon light-top-margin">
-                {{ cost.room.hotel.name }}
-            </div>
+    {% if search == 'empty' %}
+      <span class='col-lg-offset-3'>
+        Nessun risultato, si metta in 
+      </span>
+      <a  href="{% url 'wait_line' start=string_start end=string_end city=city people=people%}" class="btn-lg btn-primary">attesa</a>
+    {% endif%}
+    {% for cost, week_cost in costs %}
+      <div id="single-search-result" class="row thin-border light-bottom-margin">
+        <div class="col-lg-4 light-top-bot-margin">
+          <div class="col-lg-8 center-icon">
+            <img src="{{ cost.room.photo }}" alt="" class="img-thumbnail col-lg-offset-1">
           </div>
-          <div class="col-lg-6 light-top-bot-margin text-wrap overflow-auto">
-            <span> {{cost.room.hotel.street}} </span>
-            <span class="text light-top-margin">{{ cost.room.description }}</span>
-          </div>
-          <div class="col-lg-2 light-top-bot-margin">
-            <div class="row center-icon">
-              <span>{{ week_cost }} &euro;</span>
-            </div>
-            <div class="row center-icon">
-              <a href="{% url 'reserve_room' cost_id=cost.id start=string_start end=string_end %}" class="btn-lg btn-primary light-top-margin">Prenota</a>
-            </div>
+          <div class="col-lg-8 center-icon light-top-margin">
+              {{ cost.room.hotel.name }}
           </div>
         </div>
-      {% endfor %}
-    </div>
+        <div class="col-lg-6 light-top-bot-margin text-wrap overflow-auto">
+          <span> {{cost.room.hotel.street}} </span>
+          <span class="text light-top-margin">{{ cost.room.description }}</span>
+        </div>
+        <div class="col-lg-2 light-top-bot-margin">
+          <div class="row center-icon">
+            <span>{{ week_cost }} &euro;</span>
+          </div>
+          <div class="row center-icon">
+            <a href="{% url 'reserve_room' cost_id=cost.id start=string_start end=string_end %}" class="btn-lg btn-primary light-top-margin">Prenota</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
   {% endblock %}
 </form>

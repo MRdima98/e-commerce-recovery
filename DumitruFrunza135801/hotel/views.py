@@ -134,14 +134,38 @@ def reserve_room(request, cost_id, start, end):
             end_date = end,
             total_cost = week_cost
         )
-        return render(request, 'reservation_list.html')
+        return my_reservations(request)
     return render(request, 'one_reservation.html', context)
 
 @login_required
 def my_reservations(request):
     reservations = Reservation.objects.filter(user=request.user)
-    print(reservations)
     context={   
         'query' : reservations
     }
     return render(request, 'reservation_list.html', context)
+
+@login_required
+def delete_reservation(request, res_id):
+    res = Reservation.objects.get(id = res_id)
+    res.delete()
+    return redirect('my_reservations')
+
+@login_required
+def update_reservation(request, res_id):
+    res = Reservation.objects.get(id = res_id)
+    raw_begin_date = str(res.begin_date)
+    raw_end_date = str(res.end_date)
+    if request.POST: 
+        start = request.POST['start']
+        end = request.POST['end']
+        check_res = Reservation.objects.exclude(begin_date__gte=start,
+            end_date = end    
+        )
+        print(check_res[0].hotel.name)
+    context = { 
+        'res' : res,
+        'raw_begin_date' : raw_begin_date,
+        'raw_end_date' : raw_end_date,
+    }
+    return render(request, 'edit_reservation.html', context)

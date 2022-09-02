@@ -8,16 +8,27 @@
   <form id="form1" class="container" method='post'>
     {% csrf_token %}
     <div class="container">
+      {% if messages %}
+      <div class="row light-top-margin">
+        <div class="messages col-lg-12">
+          {% for message in messages %}
+          <div class="col-lg-12">
+            <div{% if message.tags %} class="{{ message.tags }}  alert alert-danger "{% endif %}>{{ message }}</div>
+          </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
       <div class="row">
         <div class="col-lg-offset-4 col-lg-4 light-top-margin">
           <label class="light-left-margin">Citta</label>
-          <input id="{{res.hotel.city}}" value="{{res.hotel.city}}" type="text" class="light-left-margin form-control input" readonly>
+          <input id="{{res.cost.room.hotel.city}}" value="{{res.cost.room.hotel.city}}" type="text" class="light-left-margin form-control input" readonly>
         </div>
       </div>
       <div class="row">
         <div class="col-lg-offset-4 col-lg-4 light-top-margin">
           <label class="light-left-margin">Albergo</label>
-          <input id="{{res.hotel.name}}" value="{{res.hotel.name}}" type="text" class="light-left-margin form-control input" readonly>
+          <input id="{{res.cost.room.hotel.name}}" value="{{res.cost.room.hotel.name}}" type="text" class="light-left-margin form-control input" readonly>
         </div>
       </div>
       <div class="row">
@@ -41,7 +52,7 @@
       <div class="row light-top-margin">
         <div class="col-lg-offset-4 col-lg-4">
           <div class="col-lg-2"><a  href="#" onclick="document.getElementById('form1').submit();" class="btn-lg btn-primary">Salva</a></div>
-          <div class="col-lg-2 col-lg-offset-2"><a href={} class="btn-lg btn-danger">Anulla</a></div>
+          <div class="col-lg-2 col-lg-offset-2"><a href="{% url 'my_reservations' %}" class="btn-lg btn-danger">Anulla</a></div>
         </div>
       </div>
     </div>

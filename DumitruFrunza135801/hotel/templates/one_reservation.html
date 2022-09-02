@@ -5,21 +5,47 @@
 {% endblock %}
 
 {% block content %}
-  <form class="container" method="post" action=''>
+  <form id="form1" class="container" method='post'>
     {% csrf_token %}
-    <div class="row">
-      <div class="col-lg-12">Albero: {{ cost.room.hotel.name }}</div>
-      <div class="col-lg-12">Periodo: {{ start }} - {{ end }}</div>
-      <div class="col-lg-12">Totale: {{ week_cost }}</div>
-      <input value="{{ cost.id}}" checked name="cost_id" class="hidden">
-      <input value="{{ start }}" checked name="start" class="hidden">
-      <input value="{{ end}}" checked name="end" class="hidden">
-      <input value="{{ week_cost}}" checked name="week_cost" class="hidden">
-    </div>
-    <div class="row light-top-margin">
-      <div class="col-lg-6"><a class="btn-lg btn-danger">Annulla</a></div>
-      <div class="col-lg-6">
-        <input class="btn-lg btn-primary" type="submit" value="Conferma"></input>
+    <input value="{{ cost.id }}" checked name="cost_id" class="hidden">
+    <input value="{{ start }}" checked name="start" class="hidden">
+    <input value="{{ end }}" checked name="end" class="hidden">
+    <input value="{{ week_cost}}" checked name="week_cost" class="hidden">
+      <div class="row">
+        <div class="col-lg-offset-4 col-lg-4 light-top-margin">
+          <label class="light-left-margin">Citta</label>
+          <input value="{{cost.room.hotel.city}}" type="text" class="light-left-margin form-control input" readonly>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-offset-4 col-lg-4 light-top-margin">
+          <label class="light-left-margin">Albergo</label>
+          <input value="{{cost.room.hotel.name}}" type="text" class="light-left-margin form-control input" readonly>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-offset-4 col-lg-4 light-top-margin">
+          <label class="light-left-margin">Arrivo</label>
+          <input value="{{start}}" name="start" class="light-left-margin form-control input" readonly>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-offset-4 col-lg-4 light-top-margin">
+          <label class="light-left-margin">Ritorno</label>
+          <input value="{{end}}" name="end" class="light-left-margin form-control input" readonly>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-offset-4 col-lg-4 light-top-margin">
+          <label class="light-left-margin">Costo</label>
+          <input value="{{week_cost}}" type="text" class="light-left-margin form-control input" readonly>
+        </div>
+      </div>
+      <div class="row light-top-margin">
+        <div class="col-lg-offset-4 col-lg-4">
+          <div class="col-lg-2"><a href="{% url 'my_reservations' %}" class="btn-lg btn-danger">Anulla</a></div>
+          <div class="col-lg-2 col-lg-offset-2"><a  href="#" onclick="document.getElementById('form1').submit();" class="btn-lg btn-primary">Conferma</a></div>
+        </div>
       </div>
     </div>
   </form>

@@ -135,4 +135,4 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL='log_inE'
+LOGIN_URL='log_in'

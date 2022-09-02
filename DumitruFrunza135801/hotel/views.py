@@ -2,12 +2,15 @@ from calendar import week
 from datetime import datetime
 from functools import total_ordering
 from pickletools import read_uint1
+from turtle import begin_fill
 from django.shortcuts import render, redirect
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from .forms import HotelForm, RoomsForm, CostForm
 from django.forms import formset_factory, modelformset_factory
 from .models import Hotel, Reservation, Rooms, Cost, Activity
+from django.contrib import messages
+from django.db.models import Q
 import re
 
 def hotel_view(request,*args,**kwargs):
@@ -126,15 +129,14 @@ def reserve_room(request, cost_id, start, end):
     }
     if request.POST:
         cost = Cost.objects.get(id = request.POST['cost_id'])
-        print(cost.room.hotel)
         Reservation.objects.create(
             user = request.user,
-            hotel = cost.room.hotel,
+            cost = cost,
             begin_date = start,
             end_date = end,
             total_cost = week_cost
         )
-        return my_reservations(request)
+        return redirect('/my_reservations')
     return render(request, 'one_reservation.html', context)
 
 @login_required
@@ -159,10 +161,22 @@ def update_reservation(request, res_id):
     if request.POST: 
         start = request.POST['start']
         end = request.POST['end']
-        check_res = Reservation.objects.exclude(begin_date__gte=start,
-            end_date = end    
-        )
-        print(check_res[0].hotel.name)
+
+        other_res = Reservation.objects.filter(
+            end_date__gte = start,
+            begin_date__lte = end
+        ).exclude(id = res.id)
+
+        check_av = Cost.objects.filter(begin_date__lte = start, 
+            end_date__gte = end, room = res.cost.room)
+    
+        if check_av and not other_res:
+            res.begin_date = start
+            res.end_date = end
+            res.save()
+            return my_reservations(request)
+        else: 
+            messages.error(request, 'Data non disponibile')
     context = { 
         'res' : res,
         'raw_begin_date' : raw_begin_date,

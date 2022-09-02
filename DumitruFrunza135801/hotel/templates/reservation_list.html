@@ -23,8 +23,8 @@
         {% for res in query %}
         <tr>
           <th scope="row">{{ forloop.counter }}</th>
-          <td>{{ res.hotel.city }}</td>
-          <td>{{ res.hotel.name }}</td>
+          <td>{{ res.cost.room.hotel.city }}</td>
+          <td>{{ res.cost.room.hotel.name }}</td>
           <td>{{ res.begin_date }} - {{ res.end_date}}</td>
           <td>{{ res.total_cost }}</td>
           <td>

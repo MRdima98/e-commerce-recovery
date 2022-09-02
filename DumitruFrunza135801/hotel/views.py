@@ -174,7 +174,7 @@ def update_reservation(request, res_id):
             res.begin_date = start
             res.end_date = end
             res.save()
-            return my_reservations(request)
+            return redirect('/my_reservations')
         else: 
             messages.error(request, 'Data non disponibile')
     context = { 

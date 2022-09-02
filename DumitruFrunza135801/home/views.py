@@ -5,7 +5,7 @@ from django.db.models import Q
 
 from .forms import SearchFrom
 from hotel.forms import ActivityForm
-from hotel.models import Activity, Hotel, Rooms, Cost
+from hotel.models import Activity, Hotel, Reservation, Rooms, Cost
 from functools import reduce
 
 def home(request):
@@ -51,9 +51,22 @@ def search(request, city, start, end, people):
         hotels = Hotel.objects.filter(city=city)
 
     rooms = Rooms.objects.filter(people=people, hotel__in = hotels)
-    cost = Cost.objects.filter(begin_date__lte = start, end_date__gte = end,
-        room__in=rooms).order_by('-cost')
-    
+    reservations = Reservation.objects.filter(
+        end_date__gte = start,
+        begin_date__lte = end
+    )
+
+    cost_ids = []
+    for id in reservations:
+        cost_ids.append(id.cost.id)
+
+    cost = Cost.objects.filter(
+        begin_date__lte = start, 
+        end_date__gte = end,
+        room__in=rooms
+    ).order_by('-cost').exclude(id__in = cost_ids)
+
+
     week_cost = []
     for _ in cost: 
         week_cost.append((end-start).days*_.cost)
@@ -64,10 +77,10 @@ def search(request, city, start, end, people):
     context = { 
         'costs' : cost,
         'form' : form,
-        # 'stelle' : range(5),
         'activities' : activities,
         'checked_activities' : checked_activities,
         'string_start' : string_start, 
-        'string_end' : string_end
+        'string_end' : string_end,
+        'is_empty?' : bool(cost)
     }
     return render(request, "search.html", context)

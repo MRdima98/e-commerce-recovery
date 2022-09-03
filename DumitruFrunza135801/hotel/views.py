@@ -8,9 +8,11 @@ from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from .forms import HotelForm, RoomsForm, CostForm
 from django.forms import formset_factory, modelformset_factory
-from .models import Hotel, Reservation, Rooms, Cost, Activity
+from .models import Hotel, Reservation, Rooms, Cost, Activity, WaitLine
 from django.contrib import messages
 from django.db.models import Q
+from django.core.mail import send_mail
+from .tasks import add
 import re
 
 def hotel_view(request,*args,**kwargs):
@@ -186,6 +188,25 @@ def update_reservation(request, res_id):
 
 @login_required
 def wait_line(request, start, end, people, city):
-    print(request.POST)
-    context = {}
+    start_date = datetime.strptime(start, '%Y-%m-%d').date()
+    end_date = datetime.strptime(end, '%Y-%m-%d').date()
+    context = {
+        'city' : city,
+        'start' : start_date,
+        'end' : end_date,
+        'people' : people
+    }
+    start_date = datetime.strptime(start, '%Y-%m-%d').date()
+    end_date = datetime.strptime(end, '%Y-%m-%d').date()
+    if request.POST:
+        print(city)
+        print(request.POST)
+        WaitLine.objects.create(
+            user = request.user,
+            begin_date = start_date,
+            city = request.POST['city'],
+            end_date = end_date,
+            people = request.POST['people'],
+        )
+
     return render(request, 'wait_line.html', context)

@@ -1,1 +1,49 @@
-ciao
+{% extends 'base.html' %}
+
+{% block header %}
+  {% include 'blue_navbar.html' %}
+{% endblock %}
+
+{% block content %}
+  <form id="form1" class="container" method='post'>
+    {% csrf_token %}
+    <input value="{{ people }}" checked name="people" class="hidden">
+      <div class="row">
+        <div class="col-lg-offset-4 col-lg-4 light-top-margin">
+          <label class="light-left-margin">Citta</label>
+          <input value="{{city}}" name="city" class="light-left-margin form-control input" readonly>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-offset-4 col-lg-4 light-top-margin">
+          <label class="light-left-margin">Albergo</label>
+          <input type="text" class="light-left-margin form-control input" readonly>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-offset-4 col-lg-4 light-top-margin">
+          <label class="light-left-margin">Arrivo</label>
+          <input value="{{start}}" name="start" class="light-left-margin form-control input" readonly>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-offset-4 col-lg-4 light-top-margin">
+          <label class="light-left-margin">Ritorno</label>
+          <input value="{{end}}" name="end" class="light-left-margin form-control input" readonly>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-offset-4 col-lg-4 light-top-margin">
+          <label class="light-left-margin">Costo</label>
+          <input type="text" class="light-left-margin form-control input" readonly>
+        </div>
+      </div>
+      <div class="row light-top-margin">
+        <div class="col-lg-offset-4 col-lg-4">
+          <div class="col-lg-2"><a href="{% url 'my_reservations' %}" class="btn-lg btn-danger">Anulla</a></div>
+          <div class="col-lg-2 col-lg-offset-2"><a  href="#" onclick="document.getElementById('form1').submit();" class="btn-lg btn-primary">Conferma</a></div>
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock %}

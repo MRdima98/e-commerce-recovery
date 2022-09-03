@@ -23,7 +23,6 @@ def home(request):
     return render(request, "index.html", context)
 
 def search(request, city, start, end, people):
-    print('ciao')
     form = SearchFrom(
         initial= {
             'city' : city,

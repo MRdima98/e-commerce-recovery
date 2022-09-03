@@ -6,8 +6,11 @@ name = "pypi"
 [packages]
 django = "*"
 django-filter
+celery
+setuptools==58
 
 [dev-packages]
 
 [requires]
 python_version = "3.10"
+rabbitmq

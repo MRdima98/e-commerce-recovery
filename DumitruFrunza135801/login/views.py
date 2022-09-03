@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .forms import RegisterForm, LogInForm
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 
@@ -38,5 +38,11 @@ def register(request):
     context = { 'form' : register_form }
     return render(request, 'register.html', context)
 
-def log_or_register(request):
-    return render(request, 'log_or_register.html', {})
+def my_logout(request):
+    logout(request)
+    next = request.GET.get('next', '/')
+    return HttpResponseRedirect(next)
+
+def go_back(request):
+    next = request.GET.get('next', '/')
+    return HttpResponseRedirect(next)

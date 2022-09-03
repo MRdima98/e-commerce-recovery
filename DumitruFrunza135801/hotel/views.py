@@ -29,6 +29,7 @@ def struttura(request, id):
         activities_string = hotel.free_time
         activities_list = re.compile('\w+').findall(activities_string)
         for activity in activities_list:
+            activity = activity.replace('_', ' ')
             if not Activity.objects.filter(hotel=hotel, one_activity=activity):
                 Activity.objects.create(hotel=hotel, one_activity=activity)
         form.save()
@@ -57,6 +58,7 @@ def new_hotel(request):
         activities_string = hotel.free_time
         activities_list = re.compile('\w+').findall(activities_string)
         for activity in activities_list:
+            activity = activity.replace('_', ' ')
             Activity.objects.create(hotel=hotel, one_activity=activity)
         return redirect('/hotel/rooms/' + str(hotel.id) + '&1')
     context = { "form" : my_form }
@@ -64,7 +66,7 @@ def new_hotel(request):
 
 def add_edit_room(request, hotel_id, room_id):
     rooms_form = RoomsForm(request.POST or None, request.FILES or None)
-    cost_factory = formset_factory(CostForm, extra = 4)
+    cost_factory = formset_factory(CostForm, extra = 1)
     cost_formset = cost_factory(request.POST or None)
     hotel = Hotel.objects.get(id=hotel_id)
     if cost_formset.is_valid() and rooms_form.is_valid():
@@ -112,6 +114,8 @@ def edit_room(request, room_id, hotel_id):
         "rooms_form" : rooms_form, 
         "cost_form" : cost_formset,
         "cost_ids" : cost_ids,
+        "hotel_id" : hotel_id,
+        "room_id" : room_id 
     }
 
     return render(request, 'one_room.html', context)
@@ -144,7 +148,7 @@ def reserve_room(request, cost_id, start, end):
 @login_required
 def my_reservations(request):
     reservations = Reservation.objects.filter(user=request.user)
-    context={   
+    context = {   
         'query' : reservations
     }
     return render(request, 'reservation_list.html', context)
@@ -199,8 +203,6 @@ def wait_line(request, start, end, people, city):
     start_date = datetime.strptime(start, '%Y-%m-%d').date()
     end_date = datetime.strptime(end, '%Y-%m-%d').date()
     if request.POST:
-        print(city)
-        print(request.POST)
         WaitLine.objects.create(
             user = request.user,
             begin_date = start_date,
@@ -208,5 +210,19 @@ def wait_line(request, start, end, people, city):
             end_date = end_date,
             people = request.POST['people'],
         )
+        return redirect('/my_reservations')
 
     return render(request, 'wait_line.html', context)
+
+def delete_room(request, room_id):
+    room = Rooms.objects.get(id = room_id)
+    hotel_id = room.hotel.id
+    room.delete()
+    hotel = Hotel.objects.get(id = hotel_id)
+    obj = Rooms.objects.filter(hotel = hotel)
+    context = { 
+        "obj": obj,
+        "rooms_count": range(int(hotel.rooms_count)) ,
+        "hotel_id" : hotel.id 
+        }
+    return render(request, "room_list.html", context)

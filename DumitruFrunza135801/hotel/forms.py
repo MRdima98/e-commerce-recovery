@@ -1,4 +1,5 @@
 from tkinter import Widget
+from xml.dom import ValidationErr
 from django import forms
 from .models import Activity, Hotel, Rooms, Cost
 
@@ -25,7 +26,9 @@ class HotelForm(forms.ModelForm):
             attrs={
                 'class': 'form-control no-resize',
                 'placeholder':'Elencare tutti i possbili passatempo e '
-                'attività di svago'}), help_text='Svaghi')
+                'attività di svago. Dividere ogni attivita con uno spazio'
+                ' e un attivita multipla con un underscore es: ping_pong'
+                }), help_text='Svaghi')
     description = forms.CharField(label=None, widget=forms.Textarea(
         attrs={
             'class': 'form-control no-resize',
@@ -33,8 +36,8 @@ class HotelForm(forms.ModelForm):
             'albergo'}), help_text='Description')
 
     class Meta: 
-         model = Hotel 
-         fields = [
+        model = Hotel 
+        fields = [
             'name',
             'IVA',
             'street',
@@ -44,7 +47,14 @@ class HotelForm(forms.ModelForm):
             'rooms_count',
             'free_time',
             'description',
-         ]
+        ]
+    
+    # def clean_IVA(self, *args, **kwargs):
+    #     IVA = self.cleaned_data.get("IVA")
+    #     if "cfa" in IVA:
+    #         return IVA 
+    #     else:
+    #         raise forms.ValidationError("Non puo contenere lettere")
 
 class RoomsForm(forms.ModelForm):
     attr= {'class': 'form-control base-height'}

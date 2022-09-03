@@ -38,7 +38,7 @@
       <span class='col-lg-offset-3'>
         Nessun risultato, si metta in 
       </span>
-      <a  href="{% url 'wait_line' start=string_start end=string_end city=city people=people%}" class="btn-lg btn-primary">attesa</a>
+      <a href="{% url 'wait_line' start=string_start end=string_end city=city people=people%}" class="btn-lg btn-primary">attesa</a>
     {% endif%}
     {% for cost, week_cost in costs %}
       <div id="single-search-result" class="row thin-border light-bottom-margin">

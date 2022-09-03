@@ -7,6 +7,7 @@
 {% block content %}
   <div class="container">
     {% csrf_token %}
+    <a href="{% url 'go_back' %}" class="btn btn-md btn-primary light-top-margin">Torna indietro</a>
     <table class="table">
       <thead>
         <tr>

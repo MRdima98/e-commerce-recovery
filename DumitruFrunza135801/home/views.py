@@ -87,3 +87,5 @@ def search(request, city, start, end, people):
         'city' : city
     }
     return render(request, "search.html", context)
+
+    

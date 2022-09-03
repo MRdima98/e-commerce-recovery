@@ -24,6 +24,7 @@ def add():
             end_date__gte = user.end_date,
             room__in=rooms
         ).order_by('-cost').exclude(id__in = cost_ids)
+        
         if cost:
             send_mail(
                 'Disponibili',
@@ -32,3 +33,4 @@ def add():
                 ['mrdima88@yahoo.it'],
                 fail_silently=False,
             )
+            user.delete()

@@ -48,13 +48,6 @@ class HotelForm(forms.ModelForm):
             'free_time',
             'description',
         ]
-    
-    # def clean_IVA(self, *args, **kwargs):
-    #     IVA = self.cleaned_data.get("IVA")
-    #     if "cfa" in IVA:
-    #         return IVA 
-    #     else:
-    #         raise forms.ValidationError("Non puo contenere lettere")
 
 class RoomsForm(forms.ModelForm):
     attr= {'class': 'form-control base-height'}

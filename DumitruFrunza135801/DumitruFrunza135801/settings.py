@@ -143,19 +143,8 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'dimafrunza69@gmail.com'
 EMAIL_HOST_PASSWORD = 'joxctgdfeeetdnrf'
 
-CELERY_TIMEZONE = "Australia/Tasmania"
-# CELERY_TASK_TRACK_STARTED = True
-# CELERY_TASK_TIME_LIMIT = 30 * 60 
-# CELERY_BROKER_BACKEND = "db+sqlite:///celery.sqlite"
-# CELERY_CACHE_BACKEND = "db+sqlite:///celery.sqlite"
-# CELERY_RESULT_BACKEND = "db+sqlite:///celery.sqlite"
-
-
+CELERY_TIMEZONE = "Europe/Rome"
 CELERY_BROKER_URL = 'amqp://guest:guest@localhost'
-
-#: Only add pickle to this list if your broker is secured
-#: from unwanted access (see userguide/security.html)
-
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_RESULT_BACKEND = 'db+sqlite:///results.sqlite'
 CELERY_TASK_SERIALIZER = 'json'

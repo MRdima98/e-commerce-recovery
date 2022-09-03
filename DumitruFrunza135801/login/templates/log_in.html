@@ -17,8 +17,10 @@
         </div>
         {% endfor %}
         <div class="col-lg-12 stick-to-end ">
-          <button class="btn btn-lg btn-danger">Annulla</button>
+          <a href="{% url 'go_back' %}" class="btn btn-lg btn-danger">Annulla</a>
           <button class="btn btn-lg btn-primary light-left-margin">Entra</button>
+          <span class="center-icon light-left-margin light-right-margin">oppure</span>
+          <a href="{% url 'register' %}" class="btn btn-lg btn-primary">Registrati</a>
         </div>
       </div>
     </div>

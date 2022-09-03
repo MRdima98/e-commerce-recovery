@@ -7,7 +7,7 @@
 {% block content %} 
 <div class="container light-top-margin">
   <div class='col-lg-2'>
-    <a href="/hotel" id="btn" class="btn btn-md btn-primary light-bottom-margin center-icon">Torna indietro</a>
+    <a href="{% url 'struttura' id=hotel_id%}" class="btn btn-md btn-primary">Torna indietro</a>
   </div>
   <form action="#" method="POST">
     {% csrf_token %}
@@ -17,6 +17,7 @@
           <th scope="col">#</th>
           <th scope="col">Nome</th>
           <th scope="col">Modifica</th>
+          <th scope="col">Elimina</th>
         </tr>
       </thead>
         <tbody>
@@ -30,12 +31,16 @@
                 <ion-icon name="create-outline"></ion-icon>
               </a>
             </td>
+            <td>
+              <a href="{% url 'delete_room' room_id=item.id %}" class="btn btn-md btn-danger">
+                <ion-icon name="trash-outline"></ion-icon>
+              </a>
+            </td>
             {% endfor%}
           </tr>
           {% endfor %}
         </tbody>
       </table>
-      <input type="submit" value="Salva" class="btn btn-lg btn-primary col-lg-4 col-lg-offset-2 light-top-margin">
   </form>
 </div>
 {% endblock %}

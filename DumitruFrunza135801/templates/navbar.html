@@ -1,21 +1,22 @@
 <div class="container">
-  <div class="col-lg-4 col-lg-offset-1 top-nav" >
+  <div class="col-lg-1 col-lg-offset-1 top-nav" >
     <a href={% url 'home' %} class="links" >HOTELS</a>
   </div>
-  {% with my_url=request.path%}
-  <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 top-nav">
-    {% if my_url == '/hotel/' %}
+  <div class="col-lg-10 top-nav stick-to-end">
     <a href={% url 'hotel_list'%} class ="links">Le mie strutture<a/>
-    {% elif my_url == '/hotel/list'%}
-    {% else %}
+    <span>|</span>
     <a href={% url 'my_reservations' %} class="links">Mie Prenotazioni</a>
     <span>|</span>
-    <a href={% url 'struttura' %} class="links">Registra la tua struttura</a>
+    <a href={% url 'hotel' %} class="links">Registra la tua struttura</a>
     <span>|</span>
+    {% if user.is_authenticated %}
+    <span>{{user.username}}</span>
+    <span>|</span>
+    <a href={% url 'logout' %} class="links">logout</a>
+    {% else %}
     <a href={% url 'register' %} class="links">Registrati</a>
     <span>|</span>
     <a href={% url 'log_in' %} class="links">Accedi</a>
     {% endif %}
-    {% endwith %}
   </div>
 </div>

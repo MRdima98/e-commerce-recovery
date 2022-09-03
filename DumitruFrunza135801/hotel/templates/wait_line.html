@@ -7,20 +7,17 @@
 {% block content %}
   <form id="form1" class="container" method='post'>
     {% csrf_token %}
-    <input value="{{ cost.id }}" checked name="cost_id" class="hidden">
-    <input value="{{ start }}" checked name="start" class="hidden">
-    <input value="{{ end }}" checked name="end" class="hidden">
-    <input value="{{ week_cost}}" checked name="week_cost" class="hidden">
+    <input value="{{ people }}" checked name="people" class="hidden">
       <div class="row">
         <div class="col-lg-offset-4 col-lg-4 light-top-margin">
           <label class="light-left-margin">Città</label>
-          <input value="{{cost.room.hotel.city}}" type="text" class="light-left-margin form-control input" readonly>
+          <input value="{{city}}" name="city" class="light-left-margin form-control input" readonly>
         </div>
       </div>
       <div class="row">
         <div class="col-lg-offset-4 col-lg-4 light-top-margin">
           <label class="light-left-margin">Albergo</label>
-          <input value="{{cost.room.hotel.name}}" type="text" class="light-left-margin form-control input" readonly>
+          <input type="text" class="light-left-margin form-control input" readonly>
         </div>
       </div>
       <div class="row">
@@ -38,7 +35,7 @@
       <div class="row">
         <div class="col-lg-offset-4 col-lg-4 light-top-margin">
           <label class="light-left-margin">Costo</label>
-          <input value="{{week_cost}}" type="text" class="light-left-margin form-control input" readonly>
+          <input type="text" class="light-left-margin form-control input" readonly>
         </div>
       </div>
       <div class="row light-top-margin">

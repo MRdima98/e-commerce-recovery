@@ -33,8 +33,15 @@ class Activity(models.Model):
     one_activity = models.TextField()
 
 class Reservation(models.Model):
-    user = models.ForeignKey(User, on_delete= models.CASCADE)
-    hotel = models.ForeignKey(Hotel, on_delete = models.CASCADE)
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    cost = models.ForeignKey(Cost, on_delete = models.CASCADE)
     begin_date = models.DateField()
     end_date = models.DateField()
     total_cost = models.DecimalField(max_digits = 10, decimal_places=2)
+
+class WaitLine(models.Model):
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    city = models.TextField()
+    begin_date = models.DateField()
+    end_date = models.DateField()
+    people = models.TextField()
